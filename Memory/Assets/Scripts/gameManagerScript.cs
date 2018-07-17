@@ -6,8 +6,9 @@ public class gameManagerScript : MonoBehaviour {
 
 	[HideInInspector]public GameObject 	firstCard = null;
 	[HideInInspector]public GameObject 	secondCard = null;
-	[HideInInspector]public int			cardsRemaining;
 	[HideInInspector]public bool 		canFlip;
+	private int							cardsRemaining = 12;
+	public float 						waitingTime = 0.90f;
 
 	// Function to get cards in variables in order to compare both of them
 	public void AddCard (GameObject card) {
@@ -27,19 +28,20 @@ public class gameManagerScript : MonoBehaviour {
 			}
 			// Else, turn them back
 			else {
-				FlipBack();
+				StartCoroutine(FlipBack());
 			}
 		}
 	}
 
-	// Destroy gameobjects of matching cards
+	// Destroy GameObjects of matching cards
 	public void DestroyCards () {
 		Destroy(firstCard);
 		Destroy(secondCard);
 	}
 
-	// Play flip back function of the cards
-	public void	FlipBack () {
+	// Play flip back function of the cards after waiting for a short time
+	IEnumerator	FlipBack () {
+		yield return new WaitForSeconds(waitingTime);
 		firstCard.GetComponent<Animation>().Play("flipCardBack");
 		secondCard.GetComponent<Animation>().Play("flipCardBack");
 		firstCard.GetComponent<cardScript>().isFlipped = false;

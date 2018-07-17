@@ -33,7 +33,7 @@ public class cardScript : MonoBehaviour {
     {
 		if (Input.GetMouseButtonDown(0) && isFlipped == false) {
 			// Rotate card on click
-			objAnim.Play();
+			objAnim.Play("flipCardClick");
 			isFlipped = true;
 			// Add card to the Game Manager
 			gm.AddCard(gameObject);

@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\cardsControllerScript.cs" />
     <Compile Include="Assets\Scripts\cardScript.cs" />
     <Compile Include="Assets\Scripts\gameManagerScript.cs" />
     <Reference Include="UnityEditor.StandardEvents">
