@@ -8,7 +8,7 @@ public class gameManagerScript : MonoBehaviour {
 	[HideInInspector]public GameObject 	secondCard = null;
 	[HideInInspector]public bool 		canFlip;
 	private int							cardsRemaining = 12;
-	public float 						waitingTime = 0.90f;
+	public float 						waitingTime = 1f;
 
 	// Function to get cards in variables in order to compare both of them
 	public void AddCard (GameObject card) {
@@ -20,7 +20,7 @@ public class gameManagerScript : MonoBehaviour {
 
 			// If cards are matching, destroy them
 			if (CheckCards()) {
-				DestroyCards();
+				StartCoroutine(DestroyCards());
 				cardsRemaining -= 2;
 				if (cardsRemaining <= 0) {
 					//////////////////////////TO DO Load endgame screen
@@ -34,7 +34,8 @@ public class gameManagerScript : MonoBehaviour {
 	}
 
 	// Destroy GameObjects of matching cards
-	public void DestroyCards () {
+	IEnumerator DestroyCards () {
+		yield return new WaitForSeconds(waitingTime);
 		Destroy(firstCard);
 		Destroy(secondCard);
 	}

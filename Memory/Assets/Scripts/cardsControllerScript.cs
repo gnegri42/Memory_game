@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class cardsControllerScript : MonoBehaviour {
 	public List<GameObject>		cardsInGame;
-	public List<int>			cardsNumber;
 	private int					rows = 3;
 	private int					columns = 4;
 	public Transform			startPosition;
@@ -13,9 +12,17 @@ public class cardsControllerScript : MonoBehaviour {
 	
 	private void Start () {
 		int maxCards = rows * columns;
-
+		// Create list of cardsNumber depending on the total number of cards we want
+		List<int>	cardsNumber = new List<int>();
+		for (int i = 0; i < cardsInGame.Count; i++) {
+			for (int j = 0; j < 2; j++) {
+				cardsNumber.Add(i);				
+			}
+		}
+		// Calculate if number of cards will fit on screen
 		if (cardsNumber.Count != maxCards)
 			Debug.LogError("Cards number is not equal to the number of cards to display");
+		// Shuffle the index of spawning cards
 		Shuffle(cardsNumber);
 		int index = 0;
 		// Spawn cards in game
@@ -32,6 +39,7 @@ public class cardsControllerScript : MonoBehaviour {
 		}
 	}
 
+	//Shuffle function to shuffle a list of ints
 	private void Shuffle (List<int> cardsNumber) {
 		for (int i = 0; i < cardsNumber.Count; i++) {
 			int tmp = cardsNumber[i];
