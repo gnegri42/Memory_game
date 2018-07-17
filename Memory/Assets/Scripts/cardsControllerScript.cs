@@ -9,8 +9,10 @@ public class cardsControllerScript : MonoBehaviour {
 	public Transform			startPosition;
 	private float				xOffset = 4.65f;
 	private float				yOffset = 3.1f;
+	private gameManagerScript 	gm;
 	
 	private void Start () {
+		gm = FindObjectOfType<gameManagerScript>();
 		int maxCards = rows * columns;
 		// Create list of cardsNumber depending on the total number of cards we want
 		List<int>	cardsNumber = new List<int>();
@@ -19,6 +21,7 @@ public class cardsControllerScript : MonoBehaviour {
 				cardsNumber.Add(i);				
 			}
 		}
+		gm.cardsRemaining = cardsNumber.Count;
 		// Calculate if number of cards will fit on screen
 		if (cardsNumber.Count != maxCards)
 			Debug.LogError("Cards number is not equal to the number of cards to display");

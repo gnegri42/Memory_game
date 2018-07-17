@@ -7,8 +7,15 @@ public class gameManagerScript : MonoBehaviour {
 	[HideInInspector]public GameObject 	firstCard = null;
 	[HideInInspector]public GameObject 	secondCard = null;
 	[HideInInspector]public bool 		canFlip;
-	private int							cardsRemaining = 12;
+	[HideInInspector]public float		timeElapsed;
+	[HideInInspector]public int			cardsRemaining;
 	public float 						waitingTime = 1f;
+
+	void Update () {
+		// Calculate time of the game
+		if (cardsRemaining > 0)
+			timeElapsed += Time.deltaTime;
+	}
 
 	// Function to get cards in variables in order to compare both of them
 	public void AddCard (GameObject card) {
