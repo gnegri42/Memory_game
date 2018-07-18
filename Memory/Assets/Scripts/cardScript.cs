@@ -6,6 +6,7 @@ public class cardScript : MonoBehaviour {
 	[HideInInspector]public bool		isFlipped = false;
 	private Animation		objAnim;
 	private SpriteRenderer 	sr;
+	private AudioSource		audioSrc;
 	public int				id;
 	public Sprite			frontCard;
 	public Sprite			backCard;
@@ -16,6 +17,7 @@ public class cardScript : MonoBehaviour {
 		objAnim = gameObject.GetComponent<Animation>();
 		sr = gameObject.GetComponent<SpriteRenderer>();
 		gm = FindObjectOfType<gameManagerScript>();
+		audioSrc = gameObject.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -31,7 +33,11 @@ public class cardScript : MonoBehaviour {
 
 	void OnMouseOver()
     {
-		if (Input.GetMouseButtonDown(0) && isFlipped == false) {
+		// Debug.Log("gm.canFlip : " + gm.canFlip);
+		// Can click if the card is not already flipped and if both cards are back to clickable state
+		if (Input.GetMouseButtonDown(0) && isFlipped == false && gm.canFlip == true) {
+			// Play flip card sound
+			audioSrc.Play();
 			// Rotate card on click
 			objAnim.Play("flipCardClick");
 			isFlipped = true;

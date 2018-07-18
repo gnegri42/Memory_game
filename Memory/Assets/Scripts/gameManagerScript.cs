@@ -11,6 +11,9 @@ public class gameManagerScript : MonoBehaviour {
 	[HideInInspector]public int			cardsRemaining;
 	public float 						waitingTime = 1f;
 
+	void Start () {
+		canFlip = true;
+	}
 	void Update () {
 		// Calculate time of the game
 		if (cardsRemaining > 0)
@@ -19,6 +22,7 @@ public class gameManagerScript : MonoBehaviour {
 
 	// Function to get cards in variables in order to compare both of them
 	public void AddCard (GameObject card) {
+		canFlip = true;
 		if (firstCard == null)
 			firstCard = card;
 		else {
@@ -29,9 +33,6 @@ public class gameManagerScript : MonoBehaviour {
 			if (CheckCards()) {
 				StartCoroutine(DestroyCards());
 				cardsRemaining -= 2;
-				if (cardsRemaining <= 0) {
-					//////////////////////////TO DO Load endgame screen
-				}
 			}
 			// Else, turn them back
 			else {
@@ -45,6 +46,7 @@ public class gameManagerScript : MonoBehaviour {
 		yield return new WaitForSeconds(waitingTime);
 		Destroy(firstCard);
 		Destroy(secondCard);
+		canFlip = true;
 	}
 
 	// Play flip back function of the cards after waiting for a short time
