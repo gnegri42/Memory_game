@@ -13,8 +13,9 @@ public class cardsControllerScript : MonoBehaviour {
 	
 	private void Start () {
 		gm = FindObjectOfType<gameManagerScript>();
+		// Calculate max number of cards to display
 		int maxCards = rows * columns;
-		// Create list of cardsNumber depending on the total number of cards we want
+		// Create list of cardsNumber depending on the total number of cards we want inn order to always have pairs
 		List<int>	cardsNumber = new List<int>();
 		for (int i = 0; i < cardsInGame.Count; i++) {
 			for (int j = 0; j < 2; j++) {

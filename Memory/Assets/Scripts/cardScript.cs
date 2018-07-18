@@ -12,7 +12,6 @@ public class cardScript : MonoBehaviour {
 	public Sprite			backCard;
 	private gameManagerScript gm;
 
-	// Use this for initialization
 	void Start () {
 		objAnim = gameObject.GetComponent<Animation>();
 		sr = gameObject.GetComponent<SpriteRenderer>();
@@ -20,20 +19,21 @@ public class cardScript : MonoBehaviour {
 		audioSrc = gameObject.GetComponent<AudioSource>();
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		// Display the front of the card if clicked
-		////////////////// TO DO Change to add a coroutine to optimize and not check at every update
 		if (gameObject.transform.rotation.y <= -0.5) {
 			sr.sprite = frontCard;
 		}
-		else
-			sr.sprite = backCard;			
+		else // Else display the back
+			sr.sprite = backCard;
 	}
 
 	void OnMouseOver()
     {
-		// Debug.Log("gm.canFlip : " + gm.canFlip);
+		//Change color if mouse is over the card
+		if (isFlipped == false && gm.canFlip == true) {
+			sr.color = new Color(0.366f, 0.6267f, 0.7547f, 1f);
+		}
 		// Can click if the card is not already flipped and if both cards are back to clickable state
 		if (Input.GetMouseButtonDown(0) && isFlipped == false && gm.canFlip == true) {
 			// Play flip card sound
@@ -44,5 +44,10 @@ public class cardScript : MonoBehaviour {
 			// Add card to the Game Manager
 			gm.AddCard(gameObject);
     	}
+	}
+
+	// Go back to normal color when mouse is out of the object
+	void OnMouseExit() {
+		sr.color = Color.white;	
 	}
 }
